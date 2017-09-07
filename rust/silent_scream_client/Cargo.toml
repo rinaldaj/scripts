@@ -1,0 +1,6 @@
+[package]
+name = "silent_scream_client"
+version = "0.1.0"
+authors = ["ajrinal"]
+
+[dependencies]
