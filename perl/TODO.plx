@@ -5,12 +5,13 @@ use warnings;
 $args = join(' ',@ARGV);
 if ($args =~ m/-a/) {
 	open( ASSIGNLIST,">>",$ENV{"HOME"}."/.assignments");
-	if($args=~m/\s*-a([a-zA-Z ]+)\s+(\d+\.?\d*)\s*$/){
-		$hours = $2;
-		$assignment = $1;
-		print ASSIGNLIST "$hours $assignment\n";
+	if($args=~m/\s*-a\s*(\d+\.?\d*)\s+(\d?\d[-\/.]\d?\d[-\/.]\d+)\s+(.*)\s*$/){
+		$hours = $1;
+		$dueDate = $2;
+		$assignment = $3;
+		print ASSIGNLIST "$dueDate $hours $assignment\n";
 	} else {
-		print("-a flag useage: -a assignmentName hoursOfAssignment\n");
+		print("-a flag useage: -a hoursOfAssignment MM-DD-YY assignement name \n");
 	}	
 	close(ASSIGNLIST);
 } elsif($args =~ m/-d/) {
