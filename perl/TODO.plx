@@ -9,7 +9,7 @@ if ($args =~ m/-a/) {
 		$hours = $1;
 		$dueDate = $2;
 		$assignment = $3;
-		print ASSIGNLIST "$dueDate $hours $assignment\n";
+		print ASSIGNLIST " $dueDate $hours $assignment\n";
 	} else {
 		print("-a flag useage: -a hoursOfAssignment MM-DD-YY assignement name \n");
 	}	
@@ -22,7 +22,7 @@ if ($args =~ m/-a/) {
 		@new = ();
 		foreach $tmp (@text) {
 			if (not $tmp =~m/$assignment/){
-				push @new, $tmp;
+				push @new,$tmp;
 			}
 		}
 		close(READ);
@@ -35,7 +35,9 @@ if ($args =~ m/-a/) {
 } else {
 	open(READ,"<",$ENV{"HOME"}."/.assignments");
 	while ($i =  <READ>) {
-		print "$i";
+		$tmp = $i;
+		$tmp =~ s/[ ]+/ /;
+		print "$tmp";
 	}
 	close(READ);
 }
