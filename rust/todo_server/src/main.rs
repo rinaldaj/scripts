@@ -1,5 +1,6 @@
 use std::net::{TcpListener,TcpStream};
 use std::io::Read;
+use std::io::prelude::*;
 
 fn handle_client(mut stream: TcpStream) {
     //do the thing
@@ -7,6 +8,10 @@ fn handle_client(mut stream: TcpStream) {
     stream.read(&mut packet).unwrap();
    
    println!("connection established {}",String::from_utf8_lossy(&packet[..]));
+    let response = String::from_utf8_lossy(&packet[..]);
+    stream.write(response.as_bytes()).unwrap();
+    stream.flush().unwrap();
+
 }
 
 fn main() {
